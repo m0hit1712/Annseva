@@ -17,3 +17,17 @@ In India, 189.2 million people i.e., 14% of our population are undernourished. A
 5. Transparency in work-flow
 
 For more References please visit: https://docs.google.com/presentation/d/1GrLS5d7Jfw0qZgmM6dOP20NgLLlkt9TQ6f08uXctGB4/edit?usp=sharing
+
+## Prototype View
+
+### Desktop View
+
+<img src="./static/images/desktop.png" height="400px" width="700px">
+
+Above screenshot is the desktop view of the front page of our application.
+
+### Mobile View
+
+<img src="./static/images/mobile.png" height="400px">
+
+Above screenshot is the mobile view of the front page of our application.

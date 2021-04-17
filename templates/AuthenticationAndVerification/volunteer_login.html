@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="{% static 'js/jquery_for_ajax/jquery.min.js' %}"></script>
+    <script src="{% static 'js/AjaxRequest.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+    <link rel="icon" type="image/png" href="{% static 'images/logo_transparent_cropped.jpg' %}"/>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Raleway&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Play&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <title>अन्नसेवा | login volunteer</title>
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="logo">
+        <h1 class="logo_name">अन्नसेवा</h1>
+      </div>
+      <nav>
+        <ul class="navbar_list">
+          <li class="navbar_item home"><a href="/">Home</a></li>
+          <li class="navbar_item about"><a href="/">About Us</a></li>
+          <li class="navbar_item signup"><a href="{% url 'volunteer_register' %}">Sign Up</a></li>
+        </ul>
+      </nav>
+    </header>
+    <section class="container">
+      <div class="regImg">
+        <div class="facts_list">
+          <ul class="facts">
+            <li class="list">Let us create a ray of Hope Together</li>
+          </ul>
+        </div>
+      </div>
+      <div class="register">
+        <form class="form" id="form" method="post" action="">
+          {% csrf_token %}
+          <div class="header">
+            <h2>Welcome Back</h2>
+          </div>
+          <div class="form-control email">
+            <label>Email or Username</label>
+            <input type="text" name="email_or_uname" placeholder="Email or Username" />
+          </div>
+          <div class="form-control password">
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Password" />
+            <div class="error" id="error-label"></div>
+          </div>
+          <div>
+            <p style="cursor: pointer;" onclick="password_reset()" >forgot password?</p>
+          </div>
+          <button class="submit">Sign In</button>
+        </form>
+      </div>
+    </section>
+  </body>
+  <script>
+    function password_reset()
+    {
+        var email = prompt("Enter you email address: ");
+        di = {"url": "", "data": {"ajax": true, "email_password_reset": email}}
+        send_ajax(di, (data) => {
+            if(data['matched']==true)
+            {
+                alert('An password reset link sent on '+email+' to reset the password');
+            }
+            else
+            {
+                alert('This email address is not registered');
+            }
+        });
+    }
+  </script>
+  
+  {% if mismatch %}
+    <script>
+      $("#error-label").text("Invalid password or username");
+      setTimeout(function(){$("#error-label").text("");},3000);
+    </script>
+  {% endif %}
+</html>

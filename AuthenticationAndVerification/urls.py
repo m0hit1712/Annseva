@@ -10,7 +10,8 @@ urlpatterns = [
     path('donor/register', views.donor_register, name="donor_register"),
     path('volunteer/register', views.volunteer_register, name="volunteer_register"),
     path('del', views.delete_session, name="del"),
-    path('activate/<uname_b64>/<token>/', views.activate_email, name='activate'),
+    path('activate/<uname_b64>/<user_type>/<token>/', views.activate_email, name='activate'),
     path('reset_password/<uname_b64>/<user_type>/<token>',
         views.reset_password, name='reset_password'),
+    path('ajax/verify_email', views.ajax_verify_email, name="ajax_verify_email")
 ]

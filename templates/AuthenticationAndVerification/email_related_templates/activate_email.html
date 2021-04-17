@@ -1,0 +1,31 @@
+<body>
+  <h1 style="color: black;">Welcome to Annseva (अन्नसेवा)</h1>
+  {% if volunteer %}
+    <h2 style="color: black;">Hello {{ user.first_name }},</h2>
+  {% elif NGO %}
+    <h2 style="color: black;">Hello {{ NGO.name }},</h2>
+  {% elif food_donor %}
+    <h2 style="color: black;">Hello {{ food_donor.name }},</h2>
+  {% endif %}
+  <h3 style="color: black;">
+    Please activate your account by clicking this button, 
+    Thank you so much for joining our team
+    We will try to help the hungry people together.
+  </h3>
+  <a
+    style="
+      padding: 10px 10px 10px 10px;
+      background-color: black;
+      color: white;
+      border-radius: 5px;
+      text-decoration: none;
+    "
+    onMouseOver="this.style.color='#241919'"
+    onMouseOut="this.style.color='black'"
+    href="https://{{ domain }}{% url 'activate' uname_b64=uname user_type=user_type token=token %}"
+  >
+    Activate your account
+  </a>
+  <br /><br /><br />
+  <p style="color: black;">If you think, it's not you, then just ignore this email.</p>
+</body>

@@ -1,0 +1,433 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  /* df9d2f */
+  background-color: #f0f0f0;
+  color: white;
+  font-family: "Open Sans", sans-serif;
+  font-size: 14;
+}
+
+.navbar {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  height: 100px;
+  width: 100%;
+  padding: 15px;
+  align-items: center;
+  margin: 0 auto 30px auto;
+  font-family: "Raleway", sans-serif;
+  background-color: rgb(28, 34, 48);
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.logo_img {
+  width: 60px;
+}
+
+.logo_name {
+  font-family: "Bebas Neue", cursive;
+  font-size: 40px;
+  margin-left: 20px;
+}
+
+.navbar_list {
+  width: 100%;
+  grid-column: 2/3;
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+}
+
+.navbar_item a {
+  text-decoration: none;
+  color: white;
+}
+
+.signin {
+  position: relative;
+  display: inline-block;
+}
+
+.signin:hover .dropdown {
+  display: block;
+}
+
+.dropdown {
+  position: absolute;
+  padding: 10px;
+  z-index: 5;
+  background-color: rgb(28, 34, 48);
+  left: -15px;
+  display: none;
+  text-align: center;
+}
+
+.dropdown_list {
+  display: block;
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.btn {
+  border: none;
+  font-family: "Raleway", sans-serif;
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+  font-size: 16px;
+  outline: none;
+}
+
+/* ********************************************************************************************************************************** */
+
+.container {
+  display: grid;
+  grid-template-columns: 48% 52%;
+  grid-template-rows: 100%;
+  width: 70%;
+  max-height: 100%;
+  margin: auto;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.regImg {
+  grid-column: 1/2;
+  grid-row: 1/2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("../images/hunger.jpg");
+  background-size: cover;
+  background-position: right;
+  background-repeat: no-repeat;
+}
+
+.facts_list {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 80px;
+  font-family: "Open Sans Condensed", sans-serif;
+  font-size: 30px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.facts {
+  text-decoration: none;
+}
+
+.list {
+  list-style: none;
+  margin-bottom: 50px;
+}
+
+.form_img {
+  height: 100%;
+  width: 100%;
+}
+
+.register {
+  grid-column: 2/3;
+  grid-row: 1/2;
+  max-width: 100%;
+  background-color: #f0f0f0;
+}
+
+.header {
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  color: black;
+  padding: 20px 40px;
+}
+
+.header h2 {
+  font-size: 30px;
+  font-family: "Encode Sans Expanded", sans-serif;
+}
+
+.form {
+  color: black;
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-control {
+  padding: 10px;
+  position: relative;
+  font-family: "Raleway", sans-serif;
+}
+
+.form-control label {
+  display: inline-block;
+  margin-bottom: 5px;
+  font-size: 20px;
+}
+
+.error {
+  font-size: 15px;
+  margin-top: 2px;
+  padding: 2px;
+  display: flex;
+  justify-content: left;
+  width: 200px;
+  color:  #ec5657;
+  font-family: "Encode Sans Expanded", sans-serif;
+}
+
+.form-control input {
+  border: none;
+  background-color: #f0f0f0;
+  border-bottom: 1px solid rgb(28, 34, 48);
+  border-radius: 2px;
+  display: block;
+  font-size: 14px;
+  padding: 10px;
+  font-family: inherit;
+  width: 300px;
+  height: 45px;
+  outline: none;
+}
+.form button {
+  display: flex;
+  justify-content: center;
+  margin: 30px auto 0px auto;
+  border: none;
+  outline: none;
+  border-radius: 35px;
+  height: 50px;
+  width: 200px;
+  align-items: center;
+  font-weight: 600;
+  background-color: rgb(28, 34, 48);
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+  margin-top: 40px;
+  font-family: "Encode Sans Expanded", sans-serif;
+}
+
+.form button:active {
+  transform: translate(0, 2px);
+}
+
+/* ***************************************************************************************************************************** */
+
+@media screen and (max-width: 1200px) {
+  .navbar {
+    grid-template-columns: 35% 65%;
+    padding: 5px;
+    font-size: 16px;
+  }
+
+  .dropdown {
+    padding: 3px;
+  }
+
+  .dropdown_list {
+    padding: 3px;
+    margin-top: 5px;
+  }
+
+  .logo_name {
+    font-size: 35px;
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: 48% 52%;
+    grid-template-rows: 100%;
+    width: 80%;
+    height: 100%;
+    margin: auto;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    /* clear: both; */
+  }
+
+  .regImg {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("../images/hunger.jpg");
+    background-size: cover;
+    background-position: right;
+    background-repeat: no-repeat;
+    min-height: 100%;
+  }
+
+  .register {
+    grid-column: 2/3;
+    grid-row: 1/2;
+    max-width: 100%;
+    height: 100%;
+    background-color: #f0f0f0;
+  }
+
+  .form {
+    color: black;
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .facts_list {
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 25px;
+  }
+
+  .list {
+    margin-bottom: 25px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .navbar {
+    padding: 5px;
+    font-size: 16px;
+  }
+
+  .dropdown {
+    padding: 3px;
+  }
+
+  .dropdown_list {
+    padding: 3px;
+    margin-top: 5px;
+  }
+
+  .logo_name {
+    font-size: 35px;
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 40% 60%;
+    width: 70%;
+    height: 100%;
+    /* clear: both; */
+    margin-bottom: 40px;
+  }
+
+  .regImg {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    min-height: 100%;
+  }
+
+  .register {
+    grid-column: 1/2;
+    grid-row: 2/3;
+    max-width: 100%;
+    height: 100%;
+  }
+
+  .facts_list {
+    font-size: 25px;
+  }
+
+  .list {
+    margin-bottom: 18px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .navbar {
+    grid-template-columns: 40% 60%;
+    font-size: 13px;
+  }
+
+  .dropdown {
+    padding: 1px;
+    text-align: center;
+  }
+
+  .dropdown_list {
+    padding: 3px;
+    margin-top: 5px;
+  }
+
+  .btn {
+    font-size: 13px;
+  }
+
+  .header {
+    text-align: center;
+  }
+
+  .logo_name {
+    font-size: 30px;
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 45% 55%;
+    width: 90%;
+    height: 100%;
+    margin: auto;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    /* clear: both; */
+    margin-bottom: 40px;
+  }
+
+  .regImg {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    min-height: 100%;
+  }
+
+  .register {
+    grid-column: 1/2;
+    grid-row: 2/3;
+    max-width: 100%;
+    height: 100%;
+  }
+
+  .facts_list {
+    font-size: 25px;
+  }
+
+  .list {
+    margin-bottom: 18px;
+  }
+
+  .form-control label {
+    font-size: 18px;
+  }
+
+  .form-control input {
+    font-size: 14px;
+    padding: 10px;
+    width: 250px;
+    height: 45px;
+  }
+  .error {
+    width: 250px;
+  }
+}

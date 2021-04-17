@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="{% static 'js/jquery_for_ajax/jquery.min.js' %}"></script>
+    <script src="{% static 'js/AjaxRequest.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/ngo_register.css' %}" />
+    <link rel="icon" type="image/png" href="{% static 'images/logo_transparent_cropped.jpg' %}"/>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Raleway&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Play&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <title>अन्नसेवा | Signup NGO</title>
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="logo">
+        <h1 class="logo_name">अन्नसेवा</h1>
+      </div>
+      <nav>
+        <ul class="navbar_list">
+          <li class="navbar_item home"><a href="/">Home</a></li>
+          <li class="navbar_item about"><a href="/">About Us</a></li>
+          <li class="navbar_item signin"><a href="{% url 'ngo_login' %}">Sign In</a></li>
+        </ul>
+      </nav>
+    </header>
+    <section class="container">
+      <div class="regImg">
+        <div class="facts_list">
+          <ul class="facts">
+            <li class="list">Get on with us in this fight with hunger</li>
+            <li class="list">
+              India contributes a quarter of the population across the world
+              suffering from hunger
+            </li>
+            <li class="list">
+              There are 19.5 crore undernourished people in India
+            </li>
+            <li class="list">
+              Up to 40 per cent of the food produced in India is wasted,
+              according to the United Nations Development Programme, and about
+              21 million tons of wheat is wasted annually.
+            </li>
+            <li class="list">
+              Average Indian diet consist of grains and vegetables and is
+              deficient in protein
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="register">
+        <form class="form" id="form" autocomplete="off" method="POST" action="">
+        {% csrf_token %}
+          <div class="header">
+            <h2>Register Your NGO</h2>
+          </div>
+          <div class="form-control username">
+            <label>NGO Name</label>
+            <input type="text" name="name" placeholder="NGO Name" />
+          </div>
+          <div class="form-control select">
+            <label>Type</label><br>
+            <select style="margin-top: 10px;" name="ngo_type" id="select_drop">
+              <option value="socila-benifit">Social Benifit</option>
+              <option value="donor-organized">Donor Organized</option>
+              <option value="government-organized">Government Organized</option>
+              <option value="government-organized">Normal</option>
+            </select>
+          </div>
+          <div class="form-control headName">
+            <label>Head Name</label>
+            <input type="text" name="head_name" placeholder="Head Name" />
+          </div>
+          <div class="form-control email">
+            <label>Email</label>
+            <input type="email" name="email" id="email" placeholder="Email" />
+            <div id="invalid-warn-email" class="error"></div>
+          </div>
+          <div class="form-control password">
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Password" />
+          </div>
+          <div class="form-control contact">
+            <label>Contact No.</label>
+            <input type="text" name="contactNo" id="contact" placeholder="Contact No." />
+            <div id="invalid-warn-contact" class="error"></div>
+          </div>
+          <button type="submit" class="submit" id="submit-btn-register">Sign Up</button>
+        </form>
+      </div>
+    </section>
+  </body>
+  <script>
+    $("#email").focusout(function () {
+      var $value = $(this).val();
+      var $reg = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+      if (!$value.match($reg)) {
+        $("#invalid-warn-email").empty();
+        $("#invalid-warn-email").text("invalid email address");
+        $("#submit-btn-register").prop("disabled", true);
+        $("#invalid-warn-email").css("color", "red");
+      }
+      else{
+        di = {"url": "register", "data": {"ajax": true, "email": $value}}
+        send_ajax(di, (data) => {
+            if (data["match"] == false) {
+              console.log("data: ", data);
+              $("#invalid-warn-email").empty();
+              $("#invalid-warn-email").append("<i style='font-size: 25px;' class='fa fa-check'></i>")
+              $("#submit-btn-register").prop("disabled", false);
+              $("#invalid-warn-email").css("color", "green");
+            }
+            else {
+              console.log("data: ", data);
+              $("#invalid-warn-email").empty();
+              $("#invalid-warn-email").text("email already registered");
+              $("#submit-btn-register").prop("disabled", true);
+              $("#invalid-warn-email").css("color", "red");
+            }
+        });
+      }
+    });
+    $("#contact").focusout(function () {
+      var $value = $(this).val();
+      var $reg = /^(\d{10}|\d{12})$/;
+      if (!$value.match($reg)) {
+        $("#invalid-warn-contact").empty();
+        $("#invalid-warn-contact").text("invalid contact number");
+        $("#submit-btn-register").prop("disabled", true);
+        $("#invalid-warn-contact").css("color", "red");
+      }
+      else{
+        di = {"url": "register", "data": {"ajax": true, "contact_number": $value}}
+        send_ajax(di, (data) => {
+            if (data["match"] == false) {
+              console.log("data: ", data);
+              $("#invalid-warn-contact").empty();
+              $("#invalid-warn-contact").append("<i style='font-size: 25px;' class='fa fa-check'></i>")
+              $("#submit-btn-register").prop("disabled", false);
+              $("#invalid-warn-contact").css("color", "green");
+            } 
+            else {
+              console.log("data: ", data);
+              $("#invalid-warn-contact").empty();
+              $("#invalid-warn-contact").text("contact number already exist");
+              $("#submit-btn-register").prop("disabled", true);
+              $("#invalid-warn-contact").css("color", "red");
+            }
+        });
+      }
+    });
+  </script>
+
+
+</html>

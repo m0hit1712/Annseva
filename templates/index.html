@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/logo_transparent_cropped.jpg' %}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Raleway&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Play&display=swap" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;500&display=swap" rel="stylesheet">
+
+    <title>अन्नसेवा</title>
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">
+            <h1 class="logo_name">अन्नसेवा</h1>
+        </div>
+        <nav>
+        <ul class="navbar_list">
+            <li class="navbar_item home"><a href="">Home</a></li>
+            <li class="navbar_item about"><a href="">About</a></li>
+            <li class="navbar_item signin">
+                <button class="btn">Sign Up</button>  
+                <div class="dropdown">
+                    <a href="{% url 'ngo_register' %}" class="dropdown_list">NGO</a>
+                    <a href="{% url 'volunteer_register' %}" class="dropdown_list">Volunteer</a>
+                    <a href="{% url 'donor_register' %}" class="dropdown_list">Donor</a>
+                </div>
+            </li>
+            <li class="navbar_item signin">
+                <button class="btn">Sign In</button>  
+                <div class="dropdown">
+                    <a href="{% url 'ngo_login' %}" class="dropdown_list">NGO</a>
+                    <a href="{% url 'volunteer_login' %}" class="dropdown_list">Volunteer</a>
+                    <a href="{% url 'donor_login' %}" class="dropdown_list">Donor</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    </header>   
+    <section class="sec_1">
+        <div class="banner_head">
+            <h1>Hope for</h1>
+            <h1>Humanity</h1>
+            <p>GIVING A HELPING HAND TO THOSE WHO NEED IT!</p>
+            <div class="btns">
+                <a href="{% url 'feed' %}" style="padding: 10px; text-decoration: none;" class="btn-1">Watch Feed</a><a href="{% url 'donor_register' %}" style="padding: 10px; text-decoration: none;" class="btn-2">Donate Now</a>
+            </div>
+        </div>
+    </section> 
+    <section class="sec_2">
+        <div class="story">
+            <h1 class="h-1">Story About</h1>
+            <h1 class="h-2">What we do</h1>
+            <p>“अन्नसेवा” is an organization that works as an intermediary feeder system that helps to provide the 
+            leftover food to the needy ones with the help of the collaboration of restaurants, hotels or café and NGOs. </p>
+        </div> 
+        <div class="story_img">
+            <img src="{% static 'images/street-2248101_1920.jpg' %}">
+        </div>  
+    </section>
+    <section class="sec_3">
+        <div class="fact_img">
+           <img src="{% static 'images/india-2507482_1920.jpg' %}">
+        </div> 
+        <div class="facts">
+            <h1>Why we need</h1>
+            <h1 style="color: #fdcf38;">you</h1>
+            <ul class="facts_list">
+                <li class="list">India contributes a quarter of the population across the world suffering from hunger</li>
+                <li class="list">There are 19.5 crore undernourished people in India</li>
+                <li class="list">Up to 40 per cent of the food produced in India is wasted, according to the United Nations Development Programme, and about 21 million tons of wheat is wasted annually.</li>
+                <li class="list">Average Indian diet consist of grains and vegetables and is deficient in protein</li>
+            </ul>
+    </section>
+    <section class="sec_4">
+        <div class="donations">
+            <h1>20K+</h1>
+            <p>Donations</p>
+        </div>
+        <div class="volunteers">
+            <h1>120+</h1>
+            <p>Volunteers</p>
+        </div>
+        <div class="centers">
+            <h1>40+</h1>
+            <p>Food Donation Centers</p>
+        </div>
+        <div class="people">
+            <h1>5000+</h1>
+            <p>People eat daily from us</p>
+        </div>
+    </section>
+    <section class="sec_5">
+        <h1>Become a Volunteer</h1>
+        <p>Join us for the better world</p>
+        <button class="btn-3">Volunteer</button>
+    </section>
+    <footer class="footer">
+        <div class="foot_logo">
+            <img class="logo_img" src="{% static '/images/logo_transparent.png' %}">
+            <p>212, Sant Ram Vihar,</p>
+            <p>Indore, Madhya Pradesh</p>
+        </div>
+        <div class="about_us">
+            <h3>About Us</h3>
+            <ul class="foot_list">
+                <li><a>Who we are</a></li>
+                <li><a>How we work</a></li>
+                <li><a>Financial</a></li>
+            </ul>
+        </div>
+        <div class="yourHelp">
+            <h3>Your Help</h3>
+            <ul class="foot_list">
+                <li><a>Leave a Legacy</a></li>
+                <li><a>Monthly Giving</a></li>
+                <li><a>Daily Donation</a></li>
+            </ul>
+        </div>
+        <div class="impact">
+            <h3>Our Impact</h3>
+            <ul class="foot_list">
+                <li><a>Provide Food</a></li>
+                <li><a>How we work</a></li>
+            </ul>
+        </div>
+        <div class="social">
+            <h3>Follow Us</h3>
+            <ul class="foot_list icons">
+                <li><a><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a></li>
+                <li><a><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a></li>
+                <li><a><i class="fa fa-google-plus fa-2x" aria-hidden="true"></i></a></li>
+                <li><a><i class="fa fa-facebook fa-2x" aria-hidden="true"></i>
+            </ul>
+        </div>  
+    </footer>
+</body>
+</html>

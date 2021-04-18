@@ -1,15 +1,25 @@
-from django.shortcuts import render
-
+import base64
+from datetime import datetime as dt
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import send_mail
+from django.http import JsonResponse, HttpResponse
+from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
+from django.utils import timezone
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.core.mail import EmailMultiAlternatives
+from .models import AddressModel, NGOModel, VolunteerModel, FoodDonorModel
 
 # support functions
 def generate_username(name):
     new = '_'.join(name.split(' ')).lower()
     now = dt.now()
-    new += now.strftime("%m%d%H")
+    new += now.strftime("%m%d%H") 
     return new
 
 
-def send_the_mail(request, u, user_type, template_path, subject):
+def send_the_mail(request, u, user_type ,template_path, subject):
     current_site = get_current_site(request)
     email_subject = subject
     t = Token()
@@ -22,8 +32,7 @@ def send_the_mail(request, u, user_type, template_path, subject):
         'user_type': user_type
     })
     to_email = u.email
-    send_mail(email_subject, msg_plain, 'mohit.djmail@gmail.com',
-              [to_email], html_message=html_message)
+    send_mail(email_subject, msg_plain, 'mohit.djmail@gmail.com', [to_email], html_message=html_message)
 
 
 class Token:
@@ -56,7 +65,7 @@ class Token:
 
 # Create your views here.
 def ngo_login(request):
-        context = {}
+    context={}
     data={}
     if request.method=="GET":
         if "ajax" in request.GET:
@@ -64,7 +73,7 @@ def ngo_login(request):
                 email = request.GET["email_password_reset"]
                 n=NGOModel.objects.filter(email=email).first()
                 if n:
-                    send_the_mail(request, n, "NGO","AuthenticationAndverification/email_related_templates/reset_password_email.html", "Password reset")
+                    send_the_mail(request, n, "NGO","AuthenticationAndVerification/email_related_templates/reset_password_email.html", "Password reset")
                     data["matched"]=True
                 else:
                     data["mismatch"]=False
@@ -92,7 +101,7 @@ def ngo_login(request):
 
 
 def donor_login(request):
-        context={}
+    context={}
     if request.method=="GET":
         if "ajax" in request.GET:
             data = {}
@@ -100,7 +109,7 @@ def donor_login(request):
                 email = request.GET["email_password_reset"]
                 f=FoodDonorModel.objects.filter(email=email).first()
                 if f:
-                    send_the_mail(request, f,"food_donor","AuthenticationAndverification/email_related_templates/reset_password_email.html", "Password reset")
+                    send_the_mail(request, f,"food_donor","AuthenticationAndVerification/email_related_templates/reset_password_email.html", "Password reset")
                     data["matched"]=True
                 else:
                     data["mismatch"]=False
@@ -126,8 +135,9 @@ def donor_login(request):
     else:
         return render(request,"Z_error_templets/error_404.html")
 
+
 def volunteer_login(request):
-        context={}
+    context={}
     if request.method=="GET":
         if "ajax" in request.GET:
             if "email_password_reset" in request.GET:
@@ -135,7 +145,7 @@ def volunteer_login(request):
                 email = request.GET["email_password_reset"]
                 v=VolunteerModel.objects.filter(email=email).first()
                 if v:
-                    send_the_mail(request, v, "volunteer","AuthenticationAndverification/email_related_templates/reset_password_email.html", "Password reset")
+                    send_the_mail(request, v, "volunteer","AuthenticationAndVerification/email_related_templates/reset_password_email.html", "Password reset")
                     data["matched"]=True
                 else:
                     data["mismatch"]=False
@@ -160,6 +170,7 @@ def volunteer_login(request):
         return render(request,"AuthenticationAndVerification/volunteer_login.html",context)
     else:
         return render(request,"Z_error_templets/error_404.html")
+
 
 def ngo_register(request):
     if request.method=="GET":
@@ -206,6 +217,8 @@ def ngo_register(request):
     else:
         return render(request,"Z_error_templets/error_404.html")
 
+
+
 def donor_register(request):
     if request.method=="GET":
         if "ajax" in request.GET:
@@ -248,6 +261,7 @@ def donor_register(request):
         return redirect("donor_dashboard")
     else:
         return render(request,"Z_error_templets/error_404.html")
+
 
 def volunteer_register(request):
     if request.method=="GET":
@@ -297,7 +311,7 @@ def delete_session(request):
     return redirect('/')
 
 
-def activate_email(request):
+def activate_email(request, uname_b64, user_type, token):
     context = {}
     try:
         uname = urlsafe_base64_decode(uname_b64).decode()
@@ -325,7 +339,8 @@ def activate_email(request):
         return redirect(d_board)
     return render(request, 'AuthenticationAndVerification/activate.html', context)
 
-def reset_password(request):
+
+def reset_password(request, uname_b64, user_type, token):
     context = {}
     if request.method == "POST":
         uname = urlsafe_base64_decode(uname_b64).decode()
@@ -373,7 +388,7 @@ def ajax_verify_email(request):
     if "ngo" in request.session:
         id_ = request.session["ngo"]
         ngo = NGOModel.objects.filter(id=id_).first()
-        send_the_mail(request, ngo, "NGO", "AuthenticationAndverification/email_related_templates/activate_email.html", "Account Activation")
+        send_the_mail(request, ngo, "NGO", "AuthenticationAndVerification/email_related_templates/activate_email.html", "Account Activation")
         data = {}
         data["mail_sent"] = True
         return JsonResponse(data)
@@ -381,7 +396,7 @@ def ajax_verify_email(request):
     elif "donor" in  request.session:
         id_ = request.session["donor"]
         donor = FoodDonorModel.objects.filter(id=id_).first()
-        send_the_mail(request, donor, "food_donor","AuthenticationAndverification/email_related_templates/activate_email.html", "Account Activation")
+        send_the_mail(request, donor, "food_donor","AuthenticationAndVerification/email_related_templates/activate_email.html", "Account Activation")
         data = {}
         data["mail_sent"] = True
         return JsonResponse(data)
@@ -389,11 +404,8 @@ def ajax_verify_email(request):
     else:
         id_ = request.session["volunteer"]
         volunteer = VolunteerModel.objects.filter(id=id_).first()
-        send_the_mail(request, volunteer, "volunteer","AuthenticationAndverification/email_related_templates/activate_email.html", "Account Activation")
+        send_the_mail(request, volunteer, "volunteer","AuthenticationAndVerification/email_related_templates/activate_email.html", "Account Activation")
         data = {}
         data["mail_sent"] = True
         return JsonResponse(data)
-
-
-
 

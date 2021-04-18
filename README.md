@@ -43,3 +43,13 @@ Above screenshot is the desktop view of the front page of our application.
 <img src="./static/images/mobile.png" height="400px">
 
 Above screenshot is the mobile view of the front page of our application.
+
+## Post View
+
+<img src="./static/images/post.png" height="400px">
+
+## Request Food
+
+<img src="./static/images/request_food.png" height="400px">
+
+

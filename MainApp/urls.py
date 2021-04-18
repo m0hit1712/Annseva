@@ -8,5 +8,7 @@ urlpatterns = [
         path("ngo/dashboard", views.ngo_dashboard, name="ngo_dashboard"),
         path("donor/dashboard", views.donor_dashboard, name="donor_dashboard"),
         path("volunteer/dashboard", views.volunteer_dashboard, name="volunteer_profile"),
+        path("post/<str:id>",views.post_view,name="post_view")
 ]
+
 

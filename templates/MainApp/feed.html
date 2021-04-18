@@ -15,6 +15,7 @@
                 <!-- Your custom styles (optional) -->
                 <script src="{% static 'bootstrap_material_design/js/bootstrap.min.js' %}"></script>
                 <link rel="stylesheet" href="{% static 'css/MainApp/feed.css' %}">
+                <script src="{% static 'js/AjaxRequest.js' %}"></script>
         </head>
         <body>
                 <div class="container-fluid overflow-hidden p-0 m-0" id="main" style="width: 100%;">
@@ -41,32 +42,9 @@
                         <div id="main_container" class="row" align="center"> 
                                 <div id="left" class="col-lg-8 col-md-12 mb-5 p-1">
                                         <section id="city_feed" class="mb-3 sec">
-                                                <div class="row w-100 p-2" align="center">
-                                                        <div class="col-lg-12 p-3" style="border-radius: 0px; width: 100%; background-color: white;">
-                                                                <div class="row w-100">
-                                                                        <div class="col-12 pl-2 text-left" >
-                                                                                <h1 class="mb-0" style="font-weight: bold;">Khana Khajana Indore</h1>
-                                                                                <p class="text-success mt-0" style="font-weight: bold;"><label class="text-muted">Status: &nbsp;</label>Active</p>
-                                                                        </div>
-                                                                </div>
-                                                                <hr class="mt-1">
-                                                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7361.474492394385!2d75.92402855604283!3d22.700823285746427!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962e31ec7333aa9%3A0x9c271e0ee479f717!2sKhana%20Khajana%20k2%20Dhaba!5e0!3m2!1sen!2sin!4v1618632090789!5m2!1sen!2sin"  style="border: 2px solid black; width: 98%; min-height: 300px;" allowfullscreen="" loading="lazy"></iframe>
-                                                                <hr class="m-1">
-                                                                <div class="container w-100 p-0 text-left p-1">
-                                                                        <p>HINT: Configure the DEFAULT AUTO IELD setting or the MainappConfig defaulta uto field attribute to point to a subclass of Auto</p>
-                                                                        <p class="text-muted mt-1 p-0" style="font-weight: bold;" >Pick food before: 10:45 pm</p>
-                                                                        <p class="text-muted mt-1 p-0" style="font-weight: bold;" >Closing time: 11:30 pm</p>
-                                                                        <div class="text-muted mt-1">
-                                                                                <label style="font-weight: bold;">Delivery locations&nbsp;</label>
-                                                                                <label class="bg-success text-light px-2 py-1" style="border-radius: 5px;">Bhawarkua</label>
-                                                                                <label class="bg-success text-light px-2 py-1" style="border-radius: 5px;">Rajiv Gandhi</label>
-                                                                                <label class="bg-success text-light px-2 py-1" style="border-radius: 5px;">Teen Imli</label>
-                                                                        </div>
-                                                                </div>
-                                                                <div class="container w-100">
-                                                                        <button class="btn btn-dark">Take work</button>
-                                                                </div>
-                                                        </div>
+                                                <div class="row w-100 p-2" align="center" id="active_posts">
+                                                </div>
+                                                <div class="row w-100 p-2" align="center" id="archive_posts">
                                                 </div>
                                         </section>
                                         <section id="nearby_feed" class="mb-3 sec" style="display: none;">
@@ -76,32 +54,12 @@
                                                 </div>
                                         </section>
                                         <section id="food_requirements" class="mb-3 sec" style="display: none;">
-                                                <div class="row w-100 p-2" align="center">
-                                                        <div class="col-lg-12 p-3" style="border-radius: 0px; width: 100%; background-color: white;">
-                                                                <div class="row w-100">
-                                                                        <div class="col-12 pl-2 text-left" >
-                                                                                <h1 class="mb-0" style="font-weight: bold;">Udaan NGO Indore</h1>
-                                                                                <p class="text-success mt-0" style="font-weight: bold;"><label class="text-muted">Post by: &nbsp;</label>Mohit Patidar</p>
-                                                                        </div>
-                                                                </div>
-                                                                <hr class="mt-1">
-                                                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3681.05591594648!2d75.88230381482498!3d22.68896228512299!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fcc4e9108905%3A0xafe2a201fe0a0a7a!2sTeen%20Imli%20Chauraha%2C%20Indore%2C%20Madhya%20Pradesh!5e0!3m2!1sen!2sin!4v1618639755015!5m2!1sen!2sin" style="border: 2px solid black; width: 98%; min-height: 300px;" allowfullscreen="" loading="lazy"></iframe>
-                                                                <hr class="m-1">
-                                                                <div class="container w-100 p-0 text-left p-1">
-                                                                        <label class="text-muted text-success" style="font-weight: bold; font-size: 20px;">Location: Teen Imli Indore, (MP)</label>
-                                                                        <p>HINT: Configure the DEFAULT AUTO IELD setting or the MainappConfig defaulta uto field attribute to point to a subclass of Auto</p>
-                                                                        <p class="text-muted mt-1 p-0" style="font-weight: bold;" >Number of people: 45</p>
-                                                                        <p class="text-muted mt-1 p-0" style="font-weight: bold;" >NGO contact: udaanindore@info.com</p>
-                                                                </div>
-                                                                <div class="container w-100">
-                                                                        <button class="btn btn-dark">Donate Food</button>
-                                                                </div>
-                                                        </div>
+                                                <div class="row w-100 p-2" align="center" id="location_request_posts">
                                                 </div>
                                         </section>
                                 </div>
                                 <div id="right" class="col-lg-4 col-md-12 mb-5 p-1 pt-3">
-                                        <div class="container w-100" style="background-color: white; height: 300px;">
+                                        <div class="container w-100" id="right-inner" style="background-color: white; height: 300px;">
 
                                         </div>
                                 </div>
@@ -131,16 +89,169 @@
                         th.classList.remove("innerlink");
                         $(".sec").css("display", "none");
                         $("#"+id).css("display", "block");
+                        initial_active_location_request_ajax()
                 }
                 </script>
-
-
                 <script>
-                function intial_city_feed_post_updation(){
-                        
+                function intial_city_feed_active_post_updation(data, i){
+                        console.log("data: ", data)
+                        url = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAPHFCnVHwyrpwaZypgVbud-qhREBu8s28&q="+data["sender_landmark"] + ", " + data["sender_city"];
+                        content = data["content"]
+                        packaging = (data["packaging"]) ? '<label class="text-success">Available</label>' : '<label class="text-muted">Not Available</label>';
+                        sender = data["sender"]
+                        address = data["sender_landmark"] + ", " + data["sender_city"]
+                        type = data["type"]
+                        dead_time = data["dead_time"]
+                        id = i
+                        numpeople = data["num_people"]
+                        post_url_mask = "{% url 'post_view' id=12345 %}".replace(/12345/, i.toString());
+                        $("#active_posts").append(`
+                                <div class="col-lg-12 p-3 mt-3" style="border-radius: 0px; width: 100%; background-color: white;">
+                                        <div class="row w-100">
+                                                <div class="col-12 pl-2 text-left" >
+                                                        <h1 class="mb-0" style="font-weight: bold;">${sender}<label style="font-size: 10px;">${type}</label></h1>
+                                                        <p class="text-success mt-0" style="font-weight: bold;"><label class="text-muted">Status: &nbsp;</label>Active</p>
+                                                </div>
+                                        </div>
+                                        <hr class="mt-1">
+                                        <iframe src="${url}"  style="border: 2px solid black; width: 98%; min-height: 300px;" allowfullscreen="" loading="lazy"></iframe>
+                                        <hr class="m-1">
+                                        <div class="container w-100 p-0 text-left p-1">
+                                                <p>${content}</p>
+                                                <p class="text-muted mt-1 p-0" style="font-weight: bold;" >packaging: ${packaging}</p>
+                                                <p class="text-muted mt-1 p-0" style="font-weight: bold;" >Closing time: ${dead_time}</p>
+                                        </div>
+                                        <div class="container w-100">
+                                                <a href=${post_url_mask} class="btn btn-dark">Take work</a>
+                                        </div>
+                                </div>
+                        `);
                 }
-                
-                
+                function intial_city_feed_archive_post_updation(data, i){
+                        console.log("data: ", data)
+                        url = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAPHFCnVHwyrpwaZypgVbud-qhREBu8s28&q="+data["sender_landmark"] + ", " + data["sender_city"];
+                        content = data["content"]
+                        packaging = (data["packaging"]) ? '<label class="text-success">Not Available</label>' : '<label class="text-muted">Not Available</label>';
+                        sender = data["sender"]
+                        address = data["sender_landmark"] + ", " + data["sender_city"]
+                        type = data["type"]
+                        dead_time = data["dead_time"]
+                        id = i
+                        numpeople = data["num_people"]
+                        $("#archive_posts").append(`
+                                <div class="col-lg-12 p-3 mt-3" style="border-radius: 0px; width: 100%; background-color: white;">
+                                        <div class="row w-100">
+                                                <div class="col-12 pl-2 text-left" >
+                                                        <h1 class="mb-0" style="font-weight: bold;">${sender}<label style="font-size: 10px;">${type}</label></h1>
+                                                        <p class="text-success mt-0" style="font-weight: bold;"><label class="text-muted">Status: &nbsp;</label>Active</p>
+                                                </div>
+                                        </div>
+                                        <hr class="mt-1">
+                                        <iframe src="${url}"  style="border: 2px solid black; width: 98%; min-height: 300px;" allowfullscreen="" loading="lazy"></iframe>
+                                        <hr class="m-1">
+                                        <div class="container w-100 p-0 text-left p-1">
+                                                <p>${content}</p>
+                                                <p class="text-muted mt-1 p-0" style="font-weight: bold;" >packaging: ${packaging}</p>
+                                                <p class="text-muted mt-1 p-0" style="font-weight: bold;" >Closing time: ${dead_time}</p>
+                                                <div class="text-muted mt-1">
+                                                        <label style="font-weight: bold;">Delivery locations&nbsp;</label>
+                                                        <label class="bg-success text-light px-2 py-1" style="border-radius: 5px;">Bhawarkua</label>
+                                                        <label class="bg-success text-light px-2 py-1" style="border-radius: 5px;">Rajiv Gandhi</label>
+                                                        <label class="bg-success text-light px-2 py-1" style="border-radius: 5px;">Teen Imli</label>
+                                                </div>
+                                        </div>
+                                        <div class="container w-100">
+                                                <button class="btn btn-dark">Take work</button>
+                                        </div>
+                                </div>
+                        `);
+                }
+                function intial_city_feed_active_location_request_updation(data, i){
+                        var address = data["address"].replace(" ", "+")
+                        var sender = data["sender"]
+                        var content = data["content"]
+                        var contact = data["contact"]
+                        var num_people = data["num_people"]
+                        var posted_by = data["posted_by"]
+                        var expiration_date = data["expiration_date"]
+                        var url = "https://www.google.com/maps/embed/v1/place?key=AIzaSyAPHFCnVHwyrpwaZypgVbud-qhREBu8s28&q="+address
+
+                        $("#location_request_posts").append(`
+                        <div class="col-lg-12 p-3" style="border-radius: 0px; width: 100%; background-color: white;">
+                                <div class="row w-100">
+                                        <div class="col-12 pl-2 text-left" >
+                                                <h1 class="mb-0" style="font-weight: bold;">${sender}</h1>
+                                                <p class="text-success mt-0" style="font-weight: bold;"><label class="text-muted">Post by: &nbsp;</label>${posted_by}</p>
+                                        </div>
+                                </div>
+                                <hr class="mt-1">
+                                <iframe src="${url}"  style="border: 2px solid black; width: 98%; min-height: 300px;" allowfullscreen="" loading="lazy"></iframe>
+                                <hr class="m-1">
+                                <div class="container w-100 p-0 text-left p-1">
+                                        <label class="text-muted text-success" style="font-weight: bold; font-size: 20px;">${address.replace("+", " ")}</label>
+                                        <p>${content}</p>
+                                        <p class="text-muted mt-1 p-0" style="font-weight: bold;" >Number of people: ${num_people}</p>
+                                        <p class="text-muted mt-1 p-0" style="font-weight: bold;" >NGO contact: ${contact}</p>
+                                </div>
+                                <div class="container w-100">
+                                        <a href="" class="btn btn-dark">Donate Food</a>
+                                </div>
+                        </div>
+                        `)
+                }
+                function intial_city_feed_archive_location_request_updation(data, i){
+
+                }
+                function initial_active_post_ajax(){
+                        di = {"url": "", "data": {"ajax": true, "activepost": true}}
+                        send_ajax(di, (data) => {
+                                for(i in data["active_posts"]){
+                                        intial_city_feed_active_post_updation(data["active_posts"][i]);
+                                }
+                        });
+                }
+                initial_active_post_ajax()
+
+                function initial_active_location_request_ajax(){
+                        di = {"url": "", "data": {"ajax": true, "activerequest": true}}
+                        send_ajax(di, (data) => {
+                                for(i in data["active_requests"]){
+                                        intial_city_feed_active_location_request_updation(data["active_requests"][i]);
+                                }
+                        });
+                }
+
+                function initial_archive_post_ajax(){
+                        di = {"url": "", "data": {"ajax": true, "archivepost": true}}
+                        send_ajax(di, (data) => {
+                                for(i in data["archive_posts"]){
+                                        intial_city_feed_archive_post_updation(data["archive_posts"][i]);
+                                }
+                        });
+                }
+                function initial_archive_location_request_ajax(){
+                        di = {"url": "", "data": {"ajax": true, "archiverequest": true}}
+                        send_ajax(di, (data) => {
+                                for(i in data["archive_requests"]){
+                                        intial_city_feed_archive_location_request_updation(data["archive_requests"][i]);
+                                }
+                        });
+                }
+
+                $(document).scroll(function(){
+                        
+                        if ($(document).width()>600 && $("#right").height() < $("#left").height())
+                        {
+                                $("#right").height($("#left").height());
+                                $("#right-inner").css("margin-top",$(document).scrollTop());
+                        }
+                        else
+                        {
+                                $("#right").css("height","auto");
+                                $("#right-inner").css("height","auto");
+                        }
+                        
+                });
                 </script>
         </body>
 </html>
